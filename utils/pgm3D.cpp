@@ -9,13 +9,20 @@ using namespace std;
 
 
 pgm3D::pgm3D(string fileName){
+
     ifstream file;
     istringstream iss;
-    file.open(fileName.c_str());
     string line;
+    file.open(fileName.c_str());
+    if(!file){
+        std::cout << "Wrong File" << std::endl;
+        exit(EXIT_FAILURE);       
+    }
     getline(file, line);
-    if(line != "PGM3D")
-       cout << "Wrong format" << endl;
+    if(line != "PGM3D"){
+        std::cout << "Bad Format" << std::endl;
+        exit(EXIT_FAILURE);
+    }
     else
     {
     getline(file, line);
@@ -34,5 +41,15 @@ pgm3D::pgm3D(string fileName){
     }
 
 }
+void pgm3D::getInfo(int *l, int *c, int *d, int *max){
+    *l = this->l;
+    *c = this->c;
+    *d = this->d;
+    *max = this->max;
 
+}
+
+vector<int> pgm3D::getValues(){
+    return values;
+}
 

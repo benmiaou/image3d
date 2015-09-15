@@ -4,6 +4,8 @@ set(SRCS
     main.cpp
     utils/pgm3D.cpp
     utils/pgm3D.hpp
+utils/voxel.cpp
+utils/voxel.hpp
 )
 
 add_executable(Image ${SRCS})
