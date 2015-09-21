@@ -1,19 +1,18 @@
 #include "voxel.hpp"
-#include "point.hpp"
-#include "quad.hpp"
 #include "GL/gl.h"
 
 voxel::voxel(pgm3D pgm)
 {
 
-    int l,c,d,max;
-    pgm.getInfo(&l,&c,&d,&max);
+    int width,height,depth,max;
+    pgm.getInfo(&width,&height,&depth,&max);
     vector<int> values = pgm.getValues();
-    vector<quad> quads;
-    for(int x = 0; x < l; x++)
-        for(int y = 0; y<c; y++)
-            for(int z =0; z<d; z++)
-              if(values[x*l*c+y*l+z]!=0){
+
+    for(int x = 0; x < width; x++)
+        for(int y = 0; y<height; y++)
+            for(int z =0; z<depth; z++)
+              if(values[x*depth*height+y*depth+z]!=0){
+                  int grey = values[x*depth*height+y*depth+z];
                   point a(x-0.5,y-0.5,z-0.5);
                   point b(x-0.5,y+0.5,z-0.5);
                   point c(x+0.5,y+0.5,z-0.5);
@@ -24,23 +23,28 @@ voxel::voxel(pgm3D pgm)
                   point h(x+0.5,y-0.5,z+0.5);
 
                   quad q(a,b,c,d);
+                  q.grey = grey;
                   quads.push_back(q);
 
                   q = quad(a,b,f,e);
+                  q.grey = grey;
                   quads.push_back(q);
 
                   q= quad(e,f,g,h);
+                  q.grey = grey;
                   quads.push_back(q);
 
                   q= quad(h,g,c,d);
+                  q.grey = grey;
                   quads.push_back(q);
 
-                  q= quad(a,d,e,h);
+                  q= quad(a,d,h,e);
+                  q.grey = grey;
                   quads.push_back(q);
 
-                  q= quad(b,c,f,g);
+                  q= quad(b,c,g,f);
+                  q.grey = grey;
                   quads.push_back(q);
-
 
               }
 

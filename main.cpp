@@ -1,9 +1,10 @@
 #include <iostream>
 #include <stdlib.h>
-#include <QApplication>
-#include <QtOpenGL>
-#include"utils/pgm3D.hpp"
-#include "visu/myWindow.hpp"
+#include "utils/pgm3D.hpp"
+#include "utils/voxel.hpp"
+#include <QtGui/QApplication>
+#include <QtOpenGL/QGLWidget>
+#include "visu/myGLWidget.hpp"
 
 
 using namespace std;
@@ -24,10 +25,12 @@ int main( int argc,  char* argv[] )
     pgm3D pgm(str);
     int l,c,d,max;
     pgm.getInfo(&l,&c,&d,&max);
-    //std::cout << "l = " << l << "c = " << c << "d = " << d << "max = " << max << std::endl;
+    voxel vox(pgm);
+    QApplication app(argc, argv);
 
-    QApplication app(argc,argv);
-    myWindow myWin;
-         myWin.show();
-        return app.exec();
+      GLWidget *window = new GLWidget(vox.quads,0);
+      window->resize(800,600);
+      window->show();
+
+      return app.exec();
 }

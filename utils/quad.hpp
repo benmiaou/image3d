@@ -10,6 +10,7 @@ class quad
 public:
     quad(point a, point b, point c, point d);
     vector<point> points;
+    float grey;
 };
 
 #endif // QUAD_H
