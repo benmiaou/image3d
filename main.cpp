@@ -23,12 +23,11 @@ int main( int argc,  char* argv[] )
     usage(argc,argv);
     string str(argv[1]);
     pgm3D pgm(str);
-    int l,c,d,max;
-    pgm.getInfo(&l,&c,&d,&max);
-    voxel vox(pgm);
+
+
     QApplication app(argc, argv);
 
-      GLWidget *window = new GLWidget(vox.quads,0);
+      GLWidget *window = new GLWidget(pgm,0);
       window->resize(800,600);
       window->show();
 

@@ -1,10 +1,23 @@
 #include "voxel.hpp"
 #include "GL/gl.h"
 
-voxel::voxel(pgm3D pgm)
+void voxel::addQuad(int otherGrey,int grey,quad q,bool allFaces){
+    if(allFaces){
+        q.grey = grey;
+        quads.push_back(q);
+    }
+    else if(otherGrey!=grey)
+        if(otherGrey < grey){
+            q.grey = grey;
+            quads.push_back(q);
+        }
+}
+
+
+voxel::voxel(pgm3D pgm, bool allFaces)
 {
 
-    int width,height,depth,max;
+   // int width,height,depth,max;
     pgm.getInfo(&width,&height,&depth,&max);
     vector<int> values = pgm.getValues();
 
@@ -13,6 +26,7 @@ voxel::voxel(pgm3D pgm)
             for(int z =0; z<depth; z++)
                 if(values[x*depth*height+y*depth+z]!=0){
                     int grey = values[x*depth*height+y*depth+z];
+                    int otherGrey;
                     point a(x-0.5,y-0.5,z-0.5);
                     point b(x-0.5,y+0.5,z-0.5);
                     point c(x+0.5,y+0.5,z-0.5);
@@ -23,42 +37,35 @@ voxel::voxel(pgm3D pgm)
                     point h(x+0.5,y-0.5,z+0.5);
                     quad q(a,b,c,d);
 
-                    if(values[x*depth*height+y*depth+z-1]==0){//z-1
-                        q = quad(a,b,c,d);
-                        q.grey = grey;
-                        quads.push_back(q);
-                    }
+                    otherGrey=values[x*depth*height+y*depth+z-1];
+                    q = quad(a,b,c,d);
+                    addQuad(otherGrey,grey,q,allFaces);
 
-                    if(values[(x-1)*depth*height+y*depth+z]==0){//x-1
-                        q = quad(a,b,f,e);
-                        q.grey = grey;
-                        quads.push_back(q);
-                    }
 
-                    if(values[x*depth*height+y*depth+z+1]==0){//z+1
-                        q= quad(e,f,g,h);
-                        q.grey = grey;
-                        quads.push_back(q);
-                    }
+                    otherGrey=values[(x-1)*depth*height+y*depth+z];
+                    q = quad(a,b,f,e);
+                    addQuad(otherGrey,grey,q,allFaces);
 
-                    if(values[(x+1)*depth*height+y*depth+z]==0){//x+1
-                        q= quad(h,g,c,d);
-                        q.grey = grey;
-                        quads.push_back(q);
-                    }
+                    otherGrey=values[x*depth*height+y*depth+z+1];
+                    q= quad(e,f,g,h);
+                    addQuad(otherGrey,grey,q,allFaces);
 
-                    if(values[x*depth*height+(y-1)*depth+z]==0){//y-1
-                        q= quad(a,d,h,e);
-                        q.grey = grey;
-                        quads.push_back(q);
-                   }
-                    if(values[x*depth*height+(y+1)*depth+z]==0){//y+1
-                        q= quad(b,c,g,f);
-                        q.grey = grey;
-                        quads.push_back(q);
-                    }
+
+                    otherGrey=values[(x+1)*depth*height+y*depth+z];
+                    q= quad(h,g,c,d);
+                    addQuad(otherGrey,grey,q,allFaces);
+
+                    otherGrey=values[x*depth*height+(y-1)*depth+z];
+                    q= quad(a,d,h,e);
+                    addQuad(otherGrey,grey,q,allFaces);
+
+                    otherGrey=values[x*depth*height+(y+1)*depth+z];
+                    q= quad(b,c,g,f);
+                    addQuad(otherGrey,grey,q,allFaces);
 
                 }
+    std::cout << "Number oh faces "<< quads.size() << std::endl;
+
 
 
 }

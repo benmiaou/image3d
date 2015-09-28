@@ -20,11 +20,13 @@ utils/quad.hpp
 
 
 visu/myGLWidget.cpp
+visu/mySlider.cpp
 
 )
 set(MYPROJECT_CURRENT_HEADERS
 
 visu/myGLWidget.hpp
+visu/mySlider.hpp
 )
 qt4_wrap_cpp(mocFiles ${MYPROJECT_CURRENT_HEADERS})
 

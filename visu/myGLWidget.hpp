@@ -6,6 +6,10 @@
 #include "../utils/point.hpp"
 #include <stdlib.h>
 #include <vector>
+#include "mySlider.hpp"
+#include "../utils/pgm3D.hpp"
+#include "../utils/voxel.hpp"
+
 using namespace std;
 
 class GLWidget : public QGLWidget {
@@ -13,8 +17,8 @@ class GLWidget : public QGLWidget {
     Q_OBJECT // must include this if you use Qt signals/slots
 
 public:
-    GLWidget( vector<quad> quads,QWidget *parent = NULL);
-    vector<quad> quads;
+    GLWidget(pgm3D pgm,QWidget *parent = NULL);
+
 
 protected:
     float angleY;
@@ -30,6 +34,9 @@ protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
+    MyScrollBar* scrollBar;
+    voxel *vox;
+    pgm3D *pgm;
 };
 
 
