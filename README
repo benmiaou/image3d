@@ -1,0 +1,21 @@
+REQUIER QT4 
+
+
+INSTALL : 
+	cmake 
+	make
+
+COMMANDE :
+	Z and S -> Translation in Z
+	Q and D -> Translation in X
+	R and F -> Translation in Y
+
+	Mouse-LeftClic + Drag -> Rotaion in X and Y
+	A and E -> Rotation  in Z
+	
+	Page_Up-> Reload the model with all the voxels, print the numbur of faces
+	Page_Down-> Reload the model only with the interfaces, print the numbur of faces
+
+RAPPORT :
+
+
