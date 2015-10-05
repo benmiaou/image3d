@@ -2,13 +2,13 @@
 #include <fstream>
 
 #include <sstream>
-#include "pgm3D.hpp"
+#include "Pgm3DLoader.hpp"
 using namespace std;
 
 
 
 
-pgm3D::pgm3D(string fileName){
+Pgm3DLoader::Pgm3DLoader(string fileName){
 
     ifstream file;
     istringstream iss;
@@ -16,7 +16,7 @@ pgm3D::pgm3D(string fileName){
     file.open(fileName.c_str());
     if(!file){
         std::cout << "Wrong File" << std::endl;
-        exit(EXIT_FAILURE);       
+        exit(EXIT_FAILURE);
     }
     getline(file, line);
     if(line != "PGM3D"){
@@ -25,23 +25,23 @@ pgm3D::pgm3D(string fileName){
     }
     else
     {
-    getline(file, line);
-    iss.str(line);
-    iss >> l >> c >> d;
-    getline(file, line);
-    iss.clear();
-    iss.str(line);
-    iss >> max;
-    while(getline(file, line)){
+        getline(file, line);
+        iss.str(line);
+        iss >> l >> c >> d;
+        getline(file, line);
         iss.clear();
         iss.str(line);
-        iss >> value;
-        values.push_back(value);
-    }
+        iss >> max;
+        while(getline(file, line)){
+            iss.clear();
+            iss.str(line);
+            while(iss >> value)
+                values.push_back(value);
+        }
     }
 
 }
-void pgm3D::getInfo(int *l, int *c, int *d, int *max){
+void Pgm3DLoader::getInfo(int *l, int *c, int *d, int *max){
     *l = this->l;
     *c = this->c;
     *d = this->d;
@@ -49,7 +49,7 @@ void pgm3D::getInfo(int *l, int *c, int *d, int *max){
 
 }
 
-vector<int> pgm3D::getValues(){
+vector<int> Pgm3DLoader::getValues(){
     return values;
 }
 

@@ -1,21 +1,24 @@
-REQUIER QT4 
+REQUIERT : 
+	- QT4
 
+INSTALLATION : 
+	-$ mkdir build
+	-$ cd build
+	-$ cmake ..
+	-$ make
 
-INSTALL : 
-	cmake 
-	make
-
-COMMANDE :
-	Z and S -> Translation in Z
-	Q and D -> Translation in X
-	R and F -> Translation in Y
-
-	Mouse-LeftClic + Drag -> Rotaion in X and Y
-	A and E -> Rotation  in Z
+EXÉCUTION :
+	-$ ./Image <filename.pgm3D>
 	
-	Page_Up-> Reload the model with all the voxels, print the numbur of faces
-	Page_Down-> Reload the model only with the interfaces, print the numbur of faces
+COMMANDE :
+	-Z et S -> Translation in Z
+	-Q et D -> Translation in X
+	-R et F -> Translation in Y
 
+	-Souris-Clic-gauche + Drag -> Rotation d'axe X et Y
+	-A et E -> Rotation  d'axe Z
+	
 RAPPORT :
-
+	Dans les cas ou il y a 2 possibilité de face j'ai choisi de garder la plus grande valeur d'intensité, la "coquille" étant blanche cela permet d'avoir un meilleur contraste avec les interfaces intérieur.
+	Pour la transparence j'ai choisi de la faire varié en fonction de leur niveau de gris, en plus de la valeur défini par le slider, j'ajoute la moitié de l'inverse de leur niveau de gris ((1-grey)/2). Comme j'ai précédemment choisi d'avoir la coquille extérieur blanche cela me permet qu'elle devienne rapidement transparente alors que les élément intérieur eux reste bien plus visible. La vue est réglé avec de bon niveau mais peut être changer avec le slider.
 

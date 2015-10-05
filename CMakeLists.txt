@@ -9,14 +9,10 @@ ADD_DEFINITIONS(-std=c++11 -fpermissive)
 
 set(SRCS
     main.cpp
-    utils/pgm3D.cpp
-    utils/pgm3D.hpp
-utils/voxel.cpp
-utils/voxel.hpp
-utils/point.cpp
-utils/point.hpp
-utils/quad.cpp
-utils/quad.hpp
+    utils/Pgm3DLoader.cpp
+    utils/Pgm3DLoader.hpp
+utils/Voxels.cpp
+utils/Voxels.hpp
 
 
 visu/myGLWidget.cpp

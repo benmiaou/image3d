@@ -2,13 +2,10 @@
 #define MYGLWIDGET_H
 
 #include <QtOpenGL/QGLWidget>
-#include "../utils/quad.hpp"
-#include "../utils/point.hpp"
 #include <stdlib.h>
 #include <vector>
 #include "mySlider.hpp"
-#include "../utils/pgm3D.hpp"
-#include "../utils/voxel.hpp"
+#include "../utils/Voxels.hpp"
 
 using namespace std;
 
@@ -17,16 +14,19 @@ class GLWidget : public QGLWidget {
     Q_OBJECT // must include this if you use Qt signals/slots
 
 public:
-    GLWidget(pgm3D pgm,QWidget *parent = NULL);
+    GLWidget(string fileName, QWidget *parent = NULL);
 
 
 protected:
+    float trX;
+    float trY;
+    float trZ;
     float angleY;
     float angleX;
+    float angleZ;
     float previousPointX;
     float previousPointY;
     float zoom;
-    float rotqube;
     void initializeGL();
     void resizeGL(int w, int h);
     void paintGL();
@@ -35,8 +35,8 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
     MyScrollBar* scrollBar;
-    voxel *vox;
-    pgm3D *pgm;
+    Voxels *mObject;
+    QVector3D center;
 };
 
 

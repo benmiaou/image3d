@@ -6,10 +6,10 @@
 #include <iostream>
 using namespace std;
 
-class pgm3D
+class Pgm3DLoader
 {
    public:
-      pgm3D(string fileName);
+      Pgm3DLoader(string fileName);
       void getInfo(int *l, int *c, int *d, int *max);
       vector<int> getValues();
    private:
