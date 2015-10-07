@@ -1,5 +1,6 @@
 REQUIERT : 
 	- QT4
+	- OpenGL 3.3
 
 INSTALLATION : 
 	-$ mkdir build
